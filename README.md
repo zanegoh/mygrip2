@@ -1,1 +1,1 @@
-# mygrip2
+# Android Training for MyGrip2
