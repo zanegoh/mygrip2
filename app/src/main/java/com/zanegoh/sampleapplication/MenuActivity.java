@@ -2,6 +2,7 @@ package com.zanegoh.sampleapplication;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,16 +16,27 @@ import android.widget.ImageView;
 
 public class MenuActivity extends Activity {
     Button btnCamera;
+    Button btnFlash;
 
     public void onCreate(Bundle b) {
         super.onCreate(b);
         setContentView(R.layout.menu_layout);
         btnCamera = (Button) findViewById(R.id.btnCamera);
         btnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 //Toast.makeText(getApplicationContext(), "Hihi", Toast.LENGTH_LONG).show();
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, 123);
+            }
+        });
+
+        btnFlash = (Button) findViewById(R.id.btnFlash);
+        btnFlash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean hasFlash = getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+
             }
         });
     }
