@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -36,7 +37,15 @@ public class MenuActivity extends Activity {
             @Override
             public void onClick(View view) {
                 boolean hasFlash = getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
-
+                if (hasFlash) {
+                    Camera camera;
+                    camera = Camera.open();
+                    Camera.Parameters params;
+                    params = camera.getParameters();
+                    params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                    camera.setParameters(params);
+                    camera.startPreview();
+                }
             }
         });
     }
